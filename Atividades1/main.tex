@@ -1,0 +1,28 @@
+\documentclass[twoside, 12pt]{article}
+\usepackage[margin=2cm]{geometry}
+\usepackage[portuguese]{babel}
+\usepackage{indentfirst}
+\usepackage{biblatex}
+\usepackage{hyperref}
+\usepackage{layout}
+\usepackage{import}
+
+\title{Exercícios de Redes}
+\author{Lucas Santiago de Oliveira}
+\date{Abril de 2022}
+
+\bibliography{reference}
+
+\begin{document}
+    \maketitle
+    \tableofcontents
+    \import{./sections}{abstract.tex}
+
+    \twocolumn % Usando duas colunas para aproveitar melhor a página
+
+    \section{Exercícios}
+    \import{./sections}{unidade0.tex}
+    \import{./sections}{unidade1.tex}   
+    
+    \printbibliography
+    \end{document}

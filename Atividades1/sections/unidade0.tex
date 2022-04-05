@@ -1,0 +1,75 @@
+\subsection{Quais são as funções das sete camadas do modelo de
+\newline referência OSI?}
+
+\subsubsection{Aplicação}
+
+Suporte a aplicações de rede (e.g., FTP, SMTP, HTTP).
+
+\subsubsection{Apresentação}
+
+Permite que as aplicações interpretem significado de
+dados, por exemplo, criptografia, compactação, convenções específicas
+da máquina.
+
+\subsubsection{Sessão}
+
+Sincronização, verificação, recuperação de troca de dados.
+
+\subsubsection{Transporte}
+
+Transferência de dados processo-processo.
+
+\subsubsection{Rede}
+
+Roteamento de pacotes da origem ao destino.
+
+\subsubsection{Enlace}
+
+Transferência de dados entre elementos vizinhos da rede.
+
+\subsubsection{Física}
+
+Transmissão de bits e meios de transmissão.
+
+\subsection{Qual a diferença de visibilidade entre as camadas de rede e
+enlace?}
+
+A camada de rede é focada em controlar os protocolos
+da rede, enquanto a camada de enlace fica por conta 
+de controle de fluxo e controle de rede. Dessa forma,
+a camada de rede tem a visibilidade apenas dos protocolos
+e a camada de enlace dos bits para encontrar erros.
+
+\subsection{Tanto a camada de rede quanto a de transporte, são
+responsáveis pela transferência de dados, qual a diferença
+entre elas?}
+
+A diferença entre as duas camadas está no elemento em que 
+são focados, enquanto a camada de transporte tem uma visão
+mais abstrata e fica por conta do tipo de protocolo escolhido
+- como os protocolos \emph{UDP} e \emph{TCP} - a camada de rede
+fica por conta de controlar o IP que será adicionado ao pacote:
+\emph{IP} e \emph{PORTA}.
+ 
+\subsection{O que significa Broadcasting na camada de rede e na de
+enlace?}
+
+\emph{Broadcasting} é o processo de enviar uma mesma mensagem
+para vários dispositivos conectados na rede simultaneamente.
+
+\subsection{No caso da rede difusão, discuta as vantagens e
+desvantagens da alocação estática, dinâmica centralizada e
+dinâmica descentralizada ou distribuída.}
+
+Um aspecto negativo que vi a algum tempo que foi citado
+por um grande programador e \emph{youtuber} chamado 
+\hyperlink{https://www.youtube.com/c/TomScottGo}{Tom Scott}.
+Ele citou algo que me fez pensar por bastante tempo.
+O grande problema de usarmos computadores para votar é a existência
+de uma chance de uma falha ou votos falsos escalarem rapidamente\cite{WEBSITE:1}. 
+
+Para deixar mais claro,
+se alguém mal intensionado conseguir ter acessado ao sistema de votação
+é muito fácil que o estrago seja muito grande, como trocar os votos de milhões
+de pessoas com apenas um clique e difícil de identificá-lo se for um 
+\emph{hacker} com grande conhecimento de computação.
