@@ -1,4 +1,3 @@
-\section{Unidade 1 - Introdução}
 \subsection{Em breve, teremos um terminal doméstico e seguro conectado a
 Internet permitindo plebiscitos instantâneos sobre questões
 importantes. Nesse caso, a política atual será eliminada. Os
@@ -29,7 +28,10 @@ discutem as questões financeiras do negócio. Esse é um exemplo de
 protocolo em várias camadas no sentido utilizado pelas redes de
 computadores? Justifique.}
 
-    Para fazer uma comparação, é possível que consideremos 
+Para fazer essa comparação podemos considerar que a empresa está dividida em 
+camada de aplicação, sendo esse o presidente, camada de transporte, rede e enlace, sendo esse
+o jurídico, e por fim, os engenheiros sendo a camada física. Toda essa divisão é feita
+sem que uma das camadas influêncie no julgamento da outra.
 
 \subsection{Um sistema tem uma hierarquia de protocolos com n camadas. As
 aplicações geram mensagens com M bytes de comprimento. Em
@@ -37,14 +39,61 @@ cada uma das camadas, é acrescentado um cabeçalho com h bytes.
 Qual é a fração dos dados enviados que corresponde ao tamanho
 dos cabeçalhos?}
 
-\subsection{Explique os termos Latência, Largura de Banda e Taxa de Dados}
+\begin{center}
+    {\huge $\frac{n * h}{n * h + M}$}
+\end{center}
 
 \subsection{Determine qual das camadas do modelo TCP/IP trata de cada uma
 das tarefas a seguir:}
 
 \subsubsection{Dividir o fluxo de bits transmitidos em quadros}
 
+Camada de enlace.
+
 \subsubsection{Definir a rota que será utilizada na sub-rede}
+
+Camada de rede.
 
 \subsection{Cite dois aspectos em que os modelos de referência OSI e TCP/IP
 são similares e dois em que eles são diferentes.}
+
+Semelhanças:
+\begin{itemize}
+    \item Existência da camada de aplicação.
+    \item Existência da camada de enlace.
+\end{itemize}
+
+Diferenças:
+\begin{itemize}
+    \item O modelo OSI tem uma camada de sessão e uma camada de apresentação.
+    \item o modelo TCP/IP possuí uma camada que abstrai as duas chamada aplicação.
+\end{itemize}
+
+\subsection{Diferencie os protocolos TCP e UDP}
+
+O modelo TCP foi pensado para criar uma conexão entre dois computadores.
+Com isso, é possível que o envio de pacotes com verificação de erro e se
+por acaso acontecer, ele pode ser resolvido reenviando o pacote. Tanto quanto
+é possível ter controle da velocidade em que os pacotes estão sendo enviados
+para não sobrecarregar a rede. 
+
+O caso do UDP é específico para aplicações
+\emph{One-Shot} que se beneficiam de ser um pacote mais leve e que usa não
+possuí controle para envios mais rápidos dos pacotes. Usos bons para o UDP
+são quando não há grande importância na integridade do conteúdo do pacote
+ou quando se quer enviar muitos pacotes rapidamente com pouco \emph{overhead}
+de processamento.
+
+\subsection{Explique os termos Latência, Largura de Banda e Taxa de Dados}
+
+\subsubsection*{Latência}
+
+Tempo necessário para o pacote atravessar toda a rede - da origem até o destino-.
+
+\subsubsection*{Largura de banda}
+
+Quantidade máxima de dados que podem trafegar em uma rede de uma só vez.
+
+\subsubsection*{Taxa de Dados}
+
+Quantidade efetiva de dados que estão sendo transmitidos na rede.

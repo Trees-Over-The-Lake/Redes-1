@@ -1,4 +1,119 @@
-\section{Unidade 1 - TCP/IP}
-\subsection{Diferencie os protocolos TCP e UDP}
+\section{Unidade 3 - Camadas de Transporte e Aplicação}
 
-\subsection{Explique os termos Latência, Largura de Banda e Taxa de Dados}
+\subsection{Faça um paralelo entre a porta para a camada de transporte e o endereço
+de rede para a camada de rede.}
+
+A porta é a função principal da camada de transporte que define a porta de origem e de destino, 
+também define o tipo do pacote se é UDP ou TCP. A principal função da camada de rede é adicionar 
+o IP de origem e o de destino.
+
+\subsection{Por que a camada de transporte dá sentido à pilha de protocolos?}
+
+A ideia é que pode existir protocolos se sobrepondo, é possível ter um protocolo UDP
+sobre um protocolo SMTP, por exemplo, a camada de transporte apenas padroniza para um protocolo
+que a origem e o destino irão conseguir comunicar. Após chegar no destino, a aplicação pode
+decidir como usar do outro procolo que foi colocado por cima do UDP.
+
+\subsection{O significa uma aplicação do tipo one shot? Os protocolos TCP pode ser
+utilizado na camada de transporte para esse tipo de aplicação? E o UDP?
+Justifique suas respostas.}
+
+Aplicações \emph{One-Shot} são aplicações que enviam uma mensagem sem se preocuparem
+se essa mensagem vai conseguir chegar ou se materá a integridade até no destino.
+Essas aplicações são normalmente para uso de aplicativos que usam áudio ou vídeo em tempo-real,
+perder um pacote ou outro não faz grande diferença para a qualidade da mensagem final.
+Isso é uma especificidade do UDP, não sendo possível fazer com o TCP. O TCP necessariamente
+exige uma conexão e checagem se o pacote chegou corretamente, caso o pacote não chegue corretamente
+será enviado outro logo após. 
+
+\subsection{Explique como executamos as primitivas de soquetes para o TCP em uma
+aplicação do tipo cliente-servidor}
+
+\begin{tabular}{|c|c|}
+    \hline
+    Primitiva & Significado \\
+    \hline
+    SOCKET & Criar um novo ponto final de comunicação \\ 
+    BIND & Anexar um endereço local a um soquete \\
+    LISTEN & Anunciar a disposição para receber conexões; mostrar o tamanho da fila \\
+    ACCEPT & Bloquear o responsável pela chamada até uma tentativa de conexão recebida \\
+    CONNECT & Tentar estabelecer uma conexão ativamente \\
+    SEND & Enviar alguns dados através da conexão \\
+    RECEIVE & Receber alguns dados da conexão \\
+    CLOSE & Encerrar a conexão \\
+    \hline
+\end{tabular}
+
+\subsubsection*{Servidor}
+
+SOCKET $\rightarrow$ Especifica o formato do endereço, tipo de serviço (e.g., fluxo de
+bytes confiável) e protocolo.
+
+BIND $\rightarrow$ Atribui um endereço de rede ao soquete. \footnote{Observação: a primitiva 
+socket não atribui diretamente um endereço porque alguns processos utilizam endereços
+anteriormente definidos}
+
+LISTEN $\rightarrow$ Aloca espaço para a fila de
+chamadas recebidas.
+
+ACCEPT $\rightarrow$ Bloqueia o responsável pela chamada até que o servidor
+receba uma tentativa de conexão. Quando o servidor recebe uma conexão, ele pode desviá-la para
+outro processo (thread) e voltar à espera por uma nova conexão.
+
+\subsubsection*{Cliente}
+
+SOCKET $\rightarrow$ Como no servidor, esta primitiva especifica o formato do endereço,
+tipo de serviço (e.g., fluxo de bytes confiável) e protocolo. \footnote{A primitiva BIND não é necessária
+no cliente, pois seu endereço é irrelevante para o servidor.}
+
+CONNECT $\rightarrow$ Tenta estabelecer uma conexão
+com o servidor.
+
+SEND / RECEIVE $\rightarrow$ As partes devem ter uma política para
+definir de quem é a vez de enviar dados.
+
+CLOSE $\rightarrow$ \emph{Desconexão simétrica:} cada parte faz sua desconexão
+para informar que não enviará mais dados.
+
+
+\subsection{Como os campos Sequence e Acknowledgement numbers atuam na
+transferência confiável de dados do TCP}
+
+O \emph{Sequence Number} identifica qual a posição do pacote completo
+essa fragmentação que chegou representa o \emph{Acknowledgement Number}
+representa qual será o próximo byte esperado do próximo fragmento. 
+
+\subsection{Explique como os campos SYN, ACK e FIN funcionam no estabelecimento e
+no término de conexões TCP}
+
+\subsubsection*{SYN}
+
+Campo feito para iniciar o processo de conexão entre a origem e o destino.
+
+\subsubsection*{ACK}
+
+Campo para representar se o \emph{Acknowledgement Number} é válido.
+
+\subsubsection*{FIN}
+
+Campo para finalizar a conexão.
+
+\subsection{Descreva o controle de fluxo no TCP}
+
+Existe um contador no computador de origem e no de destino da quantidade de pacotes
+que estão sendo enviados para a quantidade de pacotes que estão chegando no destino.
+Caso o destino esteja recebendo menos pacotes que o destino está enviando a origem irá
+diminuir o número de pacotes enviados conforme o destino avisa. O contrario também acontece
+se a rede estiver livre, o número de pacotes enviados será aumentado.
+
+\subsection{Descreva o controle de congestionamento no TCP}
+
+A fim de o emissor não esgotar a capacidade de transporte da rede, é estabelecida
+um tamanho para a janela de congestionamento. No início da conexão, a janela de
+congestionamento começa vazia e o emissor vai mandando uma quantidade
+crescente de pacotes até a rede avisar que não consegue receber uma quantidade
+maior daquele emissor. Depois disso, o emissor passa a enviar a quantidade fixa de
+pacotes por tempo até que esgote 100\% a capacidade da janela. 
+Caso a rede detecte novos emissores e veja um risco de
+congestionamento, ela pede para todos os emissores conectados limparem a sua janela de
+congestionamento e recomeçarem o processo de encontrar o tamanho máximo da nova janela.
